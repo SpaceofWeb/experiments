@@ -11,8 +11,7 @@ let d, cols, rows,
 function setup() {
 	canv = createCanvas(windowWidth, windowHeight);
 	let p = prompt('Save table as jpg at the end?', 'yes');
-	saved = p === 'yes' ? true : false;
-	alert(saved)
+	saved = p === 'yes' ? false : true;
 	d = 50;
 	angle = 0;
 	cols = Math.floor(width / d) - 1;
