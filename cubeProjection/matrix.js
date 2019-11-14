@@ -7,6 +7,7 @@ class Matrix {
 
 	
 	mult(m) {
+		// console.log('error:', this, m);
 		if (this.cols !== m.rows) throw new Error(`Cols in the first matrix need to be equal to rows second matrix`);
 
 		let m1 = this.data,

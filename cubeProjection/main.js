@@ -22,15 +22,22 @@ let points = [
 
 
 
-let matrixXY, matrixXZ, matrixYZ, matrixZW, projection;
+let matrixXY, matrixXZ, matrixYZ, matrixZW,
+		staticMatrixXY, staticMatrixXZ, staticMatrixYZ, staticMatrixZW,
+		projection3d, projection2d;
+
 let rotated = [];
 let distance = 3;
+
 let angles = {
 	XY: 0,
 	XZ: 0,
 	YZ: 0,
 	ZW: 0
 };
+
+
+gui.close();
 
 
 /////////
@@ -42,7 +49,7 @@ let dynamicRotate = {
 	XY: true,
 	XZ: false,
 	YZ: false,
-	ZW: true
+	ZW: false
 };
 
 let dynamicRotateFolder = gui.addFolder('dynamicRotate');
@@ -202,16 +209,29 @@ function draw() {
 		// projection
 		let w = val / (distance - np.w);
 
-		projection = new Matrix([
+		projection3d = new Matrix([
 			[w, 0, 0, 0],
 			[0, w, 0, 0],
 			[0, 0, w, 0]
 		]);
 
-		np = projection.mult(np.toMatrix()).toVector();
-		np.mult(width/3.5);
+		np = projection3d.mult(np.toMatrix()).toVector();
 
-		point(np.x, np.y, np.z);
+		// let z = val / (distance + np.z);
+
+		// projection2d = new Matrix([
+		// 	[z, 0, 0],
+		// 	[0, z, 0],
+		// ]);
+
+		// np = projection2d.mult(np.toMatrix(3)).toVector();
+		// np = np.mult(4/np.z);
+		np.mult(width/4);
+		// console.log(np);
+		// noLoop();
+		// return;
+
+		point(np.x, np.y, 0);
 		rotated.push(np);
 		i++;
 	}
